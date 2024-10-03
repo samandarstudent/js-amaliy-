@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Year Countdown</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('https://mbaza.uz/wp-content/uploads/2022/10/yangi-yil-keldi..jpeg') no-repeat center center/cover;
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .countdown {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .countdown span {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .label {
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            color: #aaa;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div>
+        <h1>New Year Countdown</h1>
+        <div class="countdown-container">
+            <div class="countdown">
+                <span id="days">00</span>
+                <div class="label">Days</div>
+            </div>
+            <div class="countdown">
+                <span id="hours">00</span>
+                <div class="label">Hours</div>
+            </div>
+            <div class="countdown">
+                <span id="minutes">00</span>
+                <div class="label">Minutes</div>
+            </div>
+            <div class="countdown">
+                <span id="seconds">00</span>
+                <div class="label">Seconds</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function countdown() {
+            const newYearDate = new Date('January 1, 2025 00:00:00').getTime();
+            const now = new Date().getTime();
+            const timeDifference = newYearDate - now;
+
+            const seconds = 1000;
+            const minutes = seconds * 60;
+            const hours = minutes * 60;
+            const days = hours * 24;
+
+            const d = Math.floor(timeDifference / days);
+            const h = Math.floor((timeDifference % days) / hours);
+            const m = Math.floor((timeDifference % hours) / minutes);
+            const s = Math.floor((timeDifference % minutes) / seconds);
+
+            document.getElementById('days').innerText = d;
+            document.getElementById('hours').innerText = h.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
+
+            if (timeDifference < 0) {
+                clearInterval(countdownInterval);
+                document.querySelector('h1').innerText = "Happy New Year!";
+            }
+        }
+
+        const countdownInterval = setInterval(countdown, 1000);
+    </script>
+
+</body>
+</html>
